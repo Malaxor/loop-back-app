@@ -9,4 +9,4 @@ mongoose.model('users', userSchema);
 
 // Important Note: we don't export this file via module.exports in a testing environment
 // because the model files will be required into the project multiple times, thus confusing
-// mongoose; it will think you're attempting to laod multiple files called users
+// mongoose; it will think you're attempting to load multiple files called User
