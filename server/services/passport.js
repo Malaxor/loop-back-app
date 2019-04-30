@@ -6,9 +6,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
 
 passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser(async(id, done) => {
-   const user = await User.findById(id);
-   done(null, user);
+passport.deserializeUser((id, done) => {
+   User.findById(id)
+   .then(user => done(null, user));
 });
 
 passport.use(new GoogleStrategy({
@@ -21,6 +21,6 @@ passport.use(new GoogleStrategy({
    if(existingUser) { 
       return done(null, existingUser); 
    }
-   const newUser = await new User({ googleId: profile.id });
+   const newUser = await new User({ googleId: profile.id }).save();
    done(null, newUser);
 }));
