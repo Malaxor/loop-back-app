@@ -8,6 +8,7 @@ module.exports = app => {
    
    app.get('/api/user', (req, res) => {
       res.send(req.user);
+      // res.send(req.session); // this object contains the data that is contained within the cookie
    });
    app.get('/api/logout', (req, res) => {
       req.logout();
