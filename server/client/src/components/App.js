@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-// importing everything from the actions folder, then assigning everything to the actions variable object
+
 import * as actions from '../actions';
 
 import Header from './Header';
+import Landing from './Landing';
 
 class App extends Component {
 
@@ -12,14 +13,15 @@ class App extends Component {
       this.props.fetchUser();
    }
    render() {
+      const Survey = () => <h1>Surveys</h1>
       return (
          <div className='container'>
             <BrowserRouter>
                <div>
                   <Header />
-                  <Route exact path='/survey' />
-                  <Route exact path='/survey/new' />
-                  <Route exact path='/landing' />
+                  <Route exact path='/' component={Landing} />
+                  <Route exact path='/surveys/new' component={Survey} />
+                  <Route exact path='/surveys' />
                </div>
             </BrowserRouter>
          </div>
