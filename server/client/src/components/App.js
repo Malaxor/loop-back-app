@@ -13,7 +13,7 @@ class App extends Component {
       this.props.fetchUser();
    }
    render() {
-      const Survey = () => <h1>Surveys</h1>
+      const Survey = () => <h1>Surveys</h1>;
       return (
          <div className='container'>
             <BrowserRouter>

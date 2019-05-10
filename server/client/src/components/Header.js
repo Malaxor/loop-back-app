@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import GoogleUser from './GoogleUser';
+
 class Header extends Component {
 
    renderContent() {
       switch(this.props.auth) {
          case null:
-            return;
+         return;
+
          case false:
-            return (
-               <li><a href="/auth/google">Login with Google</a></li>
-            );
+         return <GoogleUser link="/auth/google" message='Google Sign In' />;
+         
          default:
-         return <li><a href="/api/logout">Logout</a></li>;
+         return <GoogleUser link="/api/logout" message='Sign Out' />;
       }
    }
    render() {
@@ -23,8 +25,7 @@ class Header extends Component {
                <Link 
                   to={this.props.auth ? '/surveys' : '/'} 
                   className='left brand-logo'
-               >
-               Loop Back App
+               >Loop Back App
                </Link>
                <ul className='right'>
                   {this.renderContent()}
@@ -34,6 +35,8 @@ class Header extends Component {
       );
    }
 }
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = state  => ({
+   auth: state.auth
+});
 
 export default connect(mapStateToProps)(Header);
