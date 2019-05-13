@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import GoogleUser from './GoogleUser';
+import Payments from './Payments';
 
 class Header extends Component {
 
