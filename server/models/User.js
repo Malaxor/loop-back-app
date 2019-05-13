@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-   googleId: String
+   googleId: String,
+   credits: {
+      default: 0,
+      type: Number
+   }
 });
 // loading a model into mongo via mongoose: one argument signifies extraction; two arguments signify the creation of a class
 mongoose.model('users', userSchema);
