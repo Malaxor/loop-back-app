@@ -16,7 +16,10 @@ class Header extends Component {
          return <GoogleUser href="/auth/google" message='Google Sign In' />;
          
          default:
-         return <GoogleUser href="/api/logout" message='Sign Out' />;
+         return [
+            <Payments />, 
+            <GoogleUser href="/api/logout" message='Sign Out' /> 
+         ];
       }
    }
    render() {
