@@ -17,8 +17,8 @@ class Header extends Component {
          
          default:
          return [
-            <Payments />, 
-            <GoogleUser href="/api/logout" message='Sign Out' /> 
+            <li key='1'><Payments /></li>,
+            <li key='2'><GoogleUser href="/api/logout" message='Sign Out' /></li>
          ];
       }
    }
