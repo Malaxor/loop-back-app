@@ -19,6 +19,8 @@ app.use(cookieSession({
 // passport uses the req.session data, and passes it to deserializeUser
 app.use(passport.initialize());
 app.use(passport.session());
+// routes
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 app.listen(port);

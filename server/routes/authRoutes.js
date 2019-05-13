@@ -9,7 +9,6 @@ module.exports = app => {
       passport.authenticate('google'),
       (req, res) => res.redirect('/surveys')
    );
-   
    app.get('/api/user', (req, res) => {
       res.send(req.user);
       // res.send(req.session); // this object contains the data that is contained within the cookie
