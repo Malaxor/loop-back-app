@@ -12,10 +12,10 @@ class Header extends Component {
          return;
 
          case false:
-         return <GoogleUser link="/auth/google" message='Google Sign In' />;
+         return <GoogleUser href="/auth/google" message='Google Sign In' />;
          
          default:
-         return <GoogleUser link="/api/logout" message='Sign Out' />;
+         return <GoogleUser href="/api/logout" message='Sign Out' />;
       }
    }
    render() {
@@ -35,8 +35,6 @@ class Header extends Component {
       );
    }
 }
-const mapStateToProps = state  => ({
-   auth: state.auth
-});
+const mapStateToProps = ({ auth })  => ({ auth });
 
 export default connect(mapStateToProps)(Header);
