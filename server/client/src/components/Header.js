@@ -18,6 +18,7 @@ class Header extends Component {
          default:
          return [
             <li key='1'><Payments /></li>,
+            <li key='3' style={{ margin: '0 10px'}}>Credits: {this.props.auth.credits}</li>,
             <li key='2'><GoogleUser href="/api/logout" message='Sign Out' /></li>
          ];
       }
@@ -40,5 +41,4 @@ class Header extends Component {
    }
 }
 const mapStateToProps = ({ auth })  => ({ auth });
-
 export default connect(mapStateToProps)(Header);
