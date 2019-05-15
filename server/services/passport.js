@@ -1,7 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 // extracting a model from mongoose: one argument signifies extraction; two arguments signify the creation of a class
-const User = mongoose.model('users');
+const User = mongoose.model('User');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { googleClientID, googleClientSecret } = require('../config/keys');
 // the user parameter is the existingUser found in the db
@@ -10,7 +10,6 @@ passport.deserializeUser(async(id, done) => {
    const user = await User.findById(id);
    done(null, user);
 });
-
 passport.use(new GoogleStrategy({
    clientID: googleClientID,
    clientSecret: googleClientSecret,
