@@ -9,7 +9,7 @@ const userSchema = new Schema({
    }
 });
 // loading a model into mongo via mongoose: one argument signifies extraction; two arguments signify the creation of a class
-mongoose.model('users', userSchema);
+mongoose.model('User', userSchema);
 
 // Important Note: we don't export this file via module.exports in a testing environment
 // because the model files will be required into the project multiple times, thus confusing
