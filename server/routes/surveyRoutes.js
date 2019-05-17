@@ -8,11 +8,10 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 module.exports = app => {
 
    app.get('/api/surveys/vote', (req, res) => res.send('Thanks for voting'));
-
+   
    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
 
       const { title, subject, body, recipients } = req.body;
-      
       const survey = new Survey({
          title,
          subject,
@@ -22,6 +21,7 @@ module.exports = app => {
          dateSent: Date.now()
       });
       const mailer = new Mailer(survey, surveyTemplate(survey));
+
       try {
          await mailer.send();
          await survey.save();
