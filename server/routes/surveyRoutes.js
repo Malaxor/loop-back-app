@@ -6,11 +6,15 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
-   // middleware will get called in the order specified (left to right)
+
+   app.get('/api/surveys/vote', (req, res) => {
+      res.send('Thanks for voting');
+   });
+   
    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-      // survey input
+
       const { title, subject, body, recipients } = req.body;
-      // new survey model
+      
       const survey = new Survey({
          title,
          subject,
