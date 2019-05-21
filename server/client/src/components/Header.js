@@ -8,6 +8,7 @@ import Payments from './Payments';
 class Header extends Component {
 
    renderContent() {
+      
       switch(this.props.auth) {
          case null:
          return;
@@ -16,11 +17,13 @@ class Header extends Component {
          return <GoogleUser href="/auth/google" message='Google Sign In' />;
          
          default:
-         return [
-            <li key='1'><Payments /></li>,
-            <li key='3' style={{ margin: '0 10px'}}>Credits: {this.props.auth.credits}</li>,
-            <li key='2'><GoogleUser href="/api/logout" message='Sign Out' /></li>
-         ];
+         return (
+            <React.Fragment>
+               <Payments />
+               Credits: {this.props.auth.credits}
+               <GoogleUser href="/api/logout" message='Sign Out' />
+            </React.Fragment>
+         );   
       }
    }
    render() {
@@ -40,5 +43,5 @@ class Header extends Component {
       );
    }
 }
-const mapStateToProps = ({ auth })  => ({ auth });
+const mapStateToProps = ({ auth }) => ({ auth });
 export default connect(mapStateToProps)(Header);

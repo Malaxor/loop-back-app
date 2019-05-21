@@ -7,7 +7,7 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-import SurveyNew from './surveys/SurveyNew';
+import SurveyNew from './surveys/SurveyForm';
 
 class App extends Component {
 
@@ -15,11 +15,10 @@ class App extends Component {
       this.props.fetchUser();
    }
    render() {
-      const Survey = () => <h1>Surveys</h1>;
       return (
          <div className='container'>
             <BrowserRouter>
-               <div>
+               <div className='container'>
                   <Header />
                   <Route exact path='/' component={Landing} />
                   <Route exact path='/surveys' component={Dashboard} />
