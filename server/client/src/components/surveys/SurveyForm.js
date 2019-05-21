@@ -36,11 +36,14 @@ class SurveyForm extends Component {
 function validate(values) {
 
    const errors = {};
-   
-   if(!values.title) {
-      errors.title = 'You must provide a title';
-   }
 
+   _.each(FIELDS, ({ name }) => {
+
+      if(!values[name]) {
+         const message = name !== "emails" ? `A ${name} must be provided` : "Please provide at least one email";
+         errors[name] = message;
+      }
+   });
    return errors;
 }
 export default reduxForm({
