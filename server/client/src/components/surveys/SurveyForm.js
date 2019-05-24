@@ -29,12 +29,10 @@ class SurveyForm extends Component {
    }
 }
 function validate(formValues) {
-
    const errors = {};
    errors.recipients = validateEmails(formValues.recipients || '');
-   
-   _.each(formFields, ({ name, validationError }) => {
 
+   _.each(formFields, ({ name, validationError }) => {
       if(!formValues[name]) {
          errors[name] = validationError;
       }
@@ -44,5 +42,5 @@ function validate(formValues) {
 export default reduxForm({
    validate,
    form: 'surveyForm',
-   destroyOnUnmount: false // persist survey form values
+   destroyOnUnmount: false // persist surveyForm values
  })(SurveyForm);
