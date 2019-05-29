@@ -1,15 +1,17 @@
+const _ = require('lodash');
+const { Path } = require('path-parser');
+const { URL } = require('url');
 const mongoose = require('mongoose');
+const Survey = mongoose.model('Survey');
 const requireLogin = require('../middleware/requireLogin');
 const requireCredits = require('../middleware/requireCredits');
-const Survey = mongoose.model('Survey');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
    app.get('/api/surveys/vote', (req, res) => res.send('Thanks for voting'));
-   
+
    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-      
       const { title, subject, body, recipients } = req.body;
       const survey = new Survey({
          title,
@@ -32,7 +34,21 @@ module.exports = app => {
       }
    });
    app.post('/api/surveys/webhooks', (req, res) => {
-      console.log(req.body);
-      res.send({});
+
+      const events = _.map(req.body, ({ url, email }) => {
+
+         const pathname = new URL(url).pathname;
+         const p = new Path(`/api/surveys/:surveyId/:choice`);
+         const match = p.test(pathname);
+
+         if(match) {
+            return {
+               email,
+               surveyId: match.surveyId,
+               choice: match.choice
+            };
+         }
+      });
+      console.log(events);
    });
 }
