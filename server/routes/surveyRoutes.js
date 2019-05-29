@@ -9,6 +9,7 @@ module.exports = app => {
    app.get('/api/surveys/vote', (req, res) => res.send('Thanks for voting'));
    
    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+      
       const { title, subject, body, recipients } = req.body;
       const survey = new Survey({
          title,
@@ -29,5 +30,9 @@ module.exports = app => {
       catch (err) {
          res.status(422).send(err);
       }
+   });
+   app.post('/api/surveys/webhooks', (req, res) => {
+      console.log(req.body);
+      res.send({});
    });
 }
