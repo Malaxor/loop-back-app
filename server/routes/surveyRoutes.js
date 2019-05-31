@@ -12,6 +12,7 @@ module.exports = app => {
 
    app.get('/api/surveys', requireLogin, async (req, res) => {
       const surveys = await Survey.find({ _user: req.user.id }) // returns all the surveys created by the currrent user (query object)
+      .sort({ dateSent: -1 })
       .select({ recipients: false }); // don't select the recipients subdocument
       res.send(surveys);
    });
