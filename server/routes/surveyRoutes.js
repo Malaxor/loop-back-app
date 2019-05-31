@@ -9,6 +9,12 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
+
+   app.get('/api/surveys', requireLogin, async (req, res) => {
+      const surveys = await Survey.find({ _user: req.user.id }) // returns all the surveys created by the currrent user (query object)
+      .select({ recipients: false }); // don't select the recipients subdocument
+      res.send(surveys);
+   });
    app.get('/api/surveys/:surveyId/:choice', (req, res) => res.send('Thanks for voting'));
 
    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
